@@ -44,7 +44,7 @@ with right_col:
 
 
 
-heart_disease = pd.read_csv(r'C:\Users\chakr\OneDrive\Desktop\AI_bootcamp\Project\heart.csv')
+heart_disease = pd.read_csv(r'/app/heart-disease-predictor/heart.csv')
 
 
 encode1 = {'Sex': {'M':0, 'F':1}}
@@ -118,5 +118,5 @@ if model_button:
     st.subheader('This model is an artificial neural network with 3 dense layers and 20 neurons in each layer, with 91 precent training accuracy')
     st.write('')
     st.write('Heat map associated with the testing of the model:')
-    test_image = Image.open(r'C:\Users\chakr\OneDrive\Desktop\output.png')
+    test_image = Image.open(r'/app/heart-disease-predictor/output2.png')
     st.image(test_image)
