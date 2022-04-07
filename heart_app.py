@@ -6,7 +6,7 @@ from sklearn.model_selection import train_test_split
 import numpy as np
 from PIL import Image
 
-heart_model = keras.models.load_model(r"/app/heart-disease-predictor/saved_model.pb")
+heart_model = keras.models.load_model(r"/app/heart-disease-predictor/saved_model2.h5")
 
 st.set_page_config(page_title='Heart Disease Predictor', page_icon=':heart:', layout='wide')
 
