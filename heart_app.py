@@ -68,48 +68,53 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_
 x_num = ['Age', 'RestingBP', 'Cholesterol', 'FastingBS', 'MaxHR', 'Oldpeak']
 x_cat = ['Sex', 'ChestPainType', 'RestingECG', 'ExerciseAngina', 'ST_Slope']
 
-df = pd.DataFrame({'Age': [float(age)], 'Sex': [int(sex)], 'ChestPainType': [int(chestpaintype)], 'RestingBP': [float(RestingBP)], 'Cholesterol': [float(cholesterol)], 
-                    'FastingBS': [int(fastingbs)], 'RestingECG': [int(restingecg)], 'MaxHR': [float(maxhr)], 'ExerciseAngina': [int(exerciseAngina)], 
-                    'Oldpeak': [float(oldpeak)], 'ST_Slope': [int(STslope)]})
 
-x_test_copy = x_test.copy()
+try:
+    df = pd.DataFrame({'Age': [float(age)], 'Sex': [int(sex)], 'ChestPainType': [int(chestpaintype)], 'RestingBP': [float(RestingBP)], 'Cholesterol': [float(cholesterol)], 
+                        'FastingBS': [int(fastingbs)], 'RestingECG': [int(restingecg)], 'MaxHR': [float(maxhr)], 'ExerciseAngina': [int(exerciseAngina)], 
+                        'Oldpeak': [float(oldpeak)], 'ST_Slope': [int(STslope)]})
 
-x_test_copy = x_test_copy.append(df)
+    x_test_copy = x_test.copy()
 
- # scaling the numerical features of x_test_copy to which the new entries entered by the user are also present as a row
-scaler = StandardScaler()
-x_train.loc[:, ['Age', 'RestingBP', 'Cholesterol', 'FastingBS', 'MaxHR', 'Oldpeak']] = scaler.fit_transform(x_train.loc[:, ['Age', 'RestingBP', 'Cholesterol', 'FastingBS', 'MaxHR', 'Oldpeak']])
-x_test_copy.loc[:, ['Age', 'RestingBP', 'Cholesterol', 'FastingBS', 'MaxHR', 'Oldpeak']] = scaler.transform(x_test_copy.loc[:, ['Age', 'RestingBP', 'Cholesterol', 'FastingBS', 'MaxHR', 'Oldpeak']])
+    x_test_copy = x_test_copy.append(df)
 
-y_pred = heart_model.predict(x_test_copy.iloc[-1:])
+     # scaling the numerical features of x_test_copy to which the new entries entered by the user are also present as a row
+    scaler = StandardScaler()
+    x_train.loc[:, ['Age', 'RestingBP', 'Cholesterol', 'FastingBS', 'MaxHR', 'Oldpeak']] = scaler.fit_transform(x_train.loc[:, ['Age', 'RestingBP', 'Cholesterol', 'FastingBS', 'MaxHR', 'Oldpeak']])
+    x_test_copy.loc[:, ['Age', 'RestingBP', 'Cholesterol', 'FastingBS', 'MaxHR', 'Oldpeak']] = scaler.transform(x_test_copy.loc[:, ['Age', 'RestingBP', 'Cholesterol', 'FastingBS', 'MaxHR', 'Oldpeak']])
 
-heart_pred = []
-for i in range(0,y_pred.shape[0]):
-    heart_pred.append(np.argmax(y_pred[i]))
-print(heart_pred)
+    y_pred = heart_model.predict(x_test_copy.iloc[-1:])
 
-st.write('')
-st.write('')
-st.write('')
+    heart_pred = []
+    for i in range(0,y_pred.shape[0]):
+        heart_pred.append(np.argmax(y_pred[i]))
+    print(heart_pred)
 
-st.write('Your data:')
+    st.write('')
+    st.write('')
+    st.write('')
 
-st.write(df)
+    st.write('Your data:')
 
-# st.write(x_test_copy)
-# st.write(heart_pred)
+    st.write(df)
 
-if heart_pred[0] == 1:
-    st.subheader("Chances of heart disease detected")
-    st.subheader('[The model detected that you might have a heart disease. Kindly refer to this link to find out what you should do next](https://www.medicalnewstoday.com/articles/257484#risk-factors)')
+    # st.write(x_test_copy)
+    # st.write(heart_pred)
 
-else:
-    st.subheader("Chances of heart disease absent")
+    if heart_pred[0] == 1:
+        st.subheader("Chances of heart disease detected")
+        st.subheader('[The model detected that you might have a heart disease. Kindly refer to this link to find out what you should do next](https://www.medicalnewstoday.com/articles/257484#risk-factors)')
 
-st.write('')
-st.write('')
-st.write('')
-st.write('')
+    else:
+        st.subheader("Chances of heart disease absent")
+
+    st.write('')
+    st.write('')
+    st.write('')
+    st.write('')
+    
+except ValueError:
+    pass
 
 st.write('Want to learn about the model used? Click here')
 model_button = st.checkbox('Know more about the model')
