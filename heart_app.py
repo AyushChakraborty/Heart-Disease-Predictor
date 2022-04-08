@@ -120,7 +120,7 @@ st.write('Want to learn about the model used? Click here')
 model_button = st.checkbox('Know more about the model')
 
 if model_button:
-    st.subheader('This model is an artificial neural network with 3 dense layers and 20 neurons in each layer, with 91 precent training accuracy')
+    st.subheader('This model is an artificial neural network with 3 dense layers and 20 neurons in each layer, with 92 precent training accuracy')
     st.write('')
     st.write('Heat map associated with the testing of the model:')
     test_image = Image.open(r'/app/heart-disease-predictor/output2.png')
